@@ -1,11 +1,30 @@
-import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
-import './App.css';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { TooltipProvider } from "@/components/ui/tooltip"; // <-- Import ini
+import MainLayout from "./layouts/MainLayouts";
+import Home from "./pages/Home";
+import "./App.css";
+import User from "./pages/master/user/User";
+import ListRumah from "./pages/master/rumah/List";
+import ListIuran from "./pages/master/iuran/List";
+import ListKategoriPengeluaran from "./pages/master/kategoriPengeluaran/List";
+import ListPenghuni from "./pages/master/penghuni/List";
 
 function App() {
   return (
-    <BrowserRouter>
-      
-    </BrowserRouter>
+    <TooltipProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<MainLayout />}>
+            <Route index element={<Home />} />
+            <Route path="master/users" element={<User />} />
+            <Route path="master/house" element={<ListRumah />} />
+            <Route path="master/iuran" element={<ListIuran />} />
+            <Route path="master/kategori-pengeluaran" element={<ListKategoriPengeluaran />} />
+            <Route path="master/penghuni" element={<ListPenghuni />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </TooltipProvider>
   );
 }
 
