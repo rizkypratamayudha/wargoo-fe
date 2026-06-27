@@ -20,6 +20,7 @@ import {
 import { destroy, index, show } from "@/services/mstKategoriPengeluaranService";
 import { Pen, Plus, Search, Trash2 } from "lucide-react";
 import { useEffect, useState } from "react";
+import { toast } from "sonner";
 import FormKategoriPengeluaran from "./Form";
 import {
   AlertDialog,
@@ -94,9 +95,12 @@ export default function ListKategoriPengeluaran() {
       await destroy(dataToDelete.id);
       setOpenDelete(false);
       setDataToDelete(null);
+      toast.success("Berhasil", { description: "Kategori pengeluaran berhasil dihapus" });
       fetchData();
     } catch (error) {
-      console.error("error delete data", error);
+      toast.error("Gagal", {
+        description: error.response?.data?.message || "Gagal menghapus kategori pengeluaran",
+      });
     } finally {
       setDeleting(false);
     }

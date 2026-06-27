@@ -21,6 +21,7 @@ import {
 import { destroyRumah, index, show } from "@/services/mstRumahService";
 import { Pen, Plus, Search, Trash2 } from "lucide-react";
 import { useEffect, useState } from "react";
+import { toast } from "sonner";
 import FormRumah from "./Form";
 import {
   AlertDialog,
@@ -95,9 +96,12 @@ export default function ListRumah() {
       await destroyRumah(rumahToDelete.id);
       setOpenDelete(false);
       setRumahToDelete(null);
+      toast.success("Berhasil", { description: "Rumah berhasil dihapus" });
       fetchData();
     } catch (error) {
-      console.error("error deleting data", error);
+      toast.error("Gagal", {
+        description: error.response?.data?.message || "Gagal menghapus rumah",
+      });
     } finally {
       setDeleting(false);
     }
