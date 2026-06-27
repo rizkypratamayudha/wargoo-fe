@@ -19,7 +19,9 @@ import {
   CollapsibleTrigger,
 } from "@/components/ui/collapsible";
 import { Link } from "react-router-dom";
-import { ChevronRight, Database, Home, Key, LayoutDashboard, Users } from "lucide-react";
+import { ChevronRight, Database, Home, Key, LayoutDashboard, LogOut, Receipt, TrendingDown, Users, Wallet } from "lucide-react";
+import { useAuth } from "@/contexts/AuthContext";
+import { Button } from "@/components/ui/button";
 
 // Data menu yang sudah mendukung fitur Dropdown (Sub-menu)
 const menuItems = [
@@ -34,6 +36,21 @@ const menuItems = [
     icon: Home,
   },
   {
+    title: "Tagihan",
+    url: "tagihan",
+    icon: Receipt,
+  },
+  {
+    title: "Pembayaran",
+    url: "pembayaran",
+    icon: Wallet,
+  },
+  {
+    title: "Pengeluaran",
+    url: "pengeluaran",
+    icon: TrendingDown,
+  },
+  {
     title: "Master Data", icon: Database,
     items: [
       { title: "Users", url: "master/users",  },
@@ -46,6 +63,8 @@ const menuItems = [
 ];
 
 export function AppSidebar() {
+  const { user, logout } = useAuth();
+
   return (
     <Sidebar>
       <SidebarHeader className="p-4 font-bold text-lg border-b">
@@ -107,7 +126,12 @@ export function AppSidebar() {
       </SidebarContent>
 
       <SidebarFooter className="p-4 border-t">
-        <span className="text-sm text-zinc-500">Logged In</span>
+        <div className="flex items-center justify-between">
+          <span className="text-sm text-muted-foreground truncate">{user?.name}</span>
+          <Button variant="ghost" size="icon" className="h-8 w-8" onClick={logout}>
+            <LogOut className="h-4 w-4" />
+          </Button>
+        </div>
       </SidebarFooter>
     </Sidebar>
   );

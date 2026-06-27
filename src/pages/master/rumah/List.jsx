@@ -1,4 +1,5 @@
 import Breadcrumbs from "@/components/Breadcrumbs";
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -199,6 +200,7 @@ export default function ListRumah() {
                 <TableHead>Nomor Rumah</TableHead>
                 <TableHead>Alamat</TableHead>
                 <TableHead>Kategori</TableHead>
+                <TableHead>Status</TableHead>
                 <TableHead>Created At</TableHead>
                 <TableHead>Updated At</TableHead>
                 <TableHead>Action</TableHead>
@@ -207,13 +209,13 @@ export default function ListRumah() {
             <TableBody>
               {loading ? (
                 <TableRow>
-                  <TableCell colSpan={7} className="text-center">
+                  <TableCell colSpan={8} className="text-center">
                     Loading...
                   </TableCell>
                 </TableRow>
               ) : filteredRumah.length === 0 ? (
                 <TableRow>
-                  <TableCell colSpan={7} className="text-center">
+                  <TableCell colSpan={8} className="text-center">
                     No data
                   </TableCell>
                 </TableRow>
@@ -224,6 +226,13 @@ export default function ListRumah() {
                     <TableCell>{rumah.nomor_rumah}</TableCell>
                     <TableCell>{rumah.alamat}</TableCell>
                     <TableCell>{formatKategori(rumah.kategori)}</TableCell>
+                    <TableCell>
+                      {rumah.status_rumah === 'dihuni' ? (
+                        <Badge variant="outline" className="bg-green-100 text-green-700 border-green-200">Dihuni</Badge>
+                      ) : (
+                        <Badge variant="outline" className="bg-gray-100 text-gray-700 border-gray-200">Tidak Dihuni</Badge>
+                      )}
+                    </TableCell>
                     <TableCell>{formatDate(rumah.created_at)}</TableCell>
                     <TableCell>{formatDate(rumah.updated_at)}</TableCell>
                     <TableCell className="justify-content-between flex gap-2">

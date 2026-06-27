@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 
-export function DatePicker({ value, onChange, placeholder = "Pilih tanggal", disabled }) {
+export function DatePicker({ value, onChange, placeholder = "Pilih tanggal", disabled, className }) {
   const [open, setOpen] = useState(false);
 
   const handleSelect = (date) => {
@@ -24,7 +24,8 @@ export function DatePicker({ value, onChange, placeholder = "Pilih tanggal", dis
           variant="outline"
           className={cn(
             "w-full justify-start text-left font-normal",
-            !value && "text-muted-foreground"
+            !value && "text-muted-foreground",
+            className
           )}
           disabled={disabled}
         >
