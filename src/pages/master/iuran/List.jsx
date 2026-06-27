@@ -14,6 +14,7 @@ import { destroyIuran, index, show } from "@/services/mstJenisIuranService";
 import { formatRupiah } from "@/lib/utils";
 import { Pen, Plus, Search, Trash2 } from "lucide-react";
 import { useEffect, useState } from "react";
+import { toast } from "sonner";
 import FormIuran from "./Form";
 import {
   AlertDialog,
@@ -81,9 +82,12 @@ export default function ListIuran() {
       await destroyIuran(dataToDelete.id);
       setOpenDelete(false);
       setDataToDelete(null);
+      toast.success("Berhasil", { description: "Jenis iuran berhasil dihapus" });
       fetchData();
     } catch (error) {
-      console.error("error delete data", error);
+      toast.error("Gagal", {
+        description: error.response?.data?.message || "Gagal menghapus jenis iuran",
+      });
     } finally {
       setDeleting(false);
     }

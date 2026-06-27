@@ -27,6 +27,7 @@ import { destroyPenghuni, index, show } from "@/services/mstPenghuniService";
 import { API_URL } from "@/config";
 import { Eye, Pen, Plus, Search, Trash2 } from "lucide-react";
 import { useEffect, useState } from "react";
+import { toast } from "sonner";
 import FormPenghuni from "./Form";
 import {
   AlertDialog,
@@ -130,9 +131,12 @@ export default function ListPenghuni() {
       await destroyPenghuni(penghuniToDelete.id);
       setOpenDelete(false);
       setPenghuniToDelete(null);
+      toast.success("Berhasil", { description: "Penghuni berhasil dihapus" });
       fetchData();
     } catch (error) {
-      console.error("error deleting data", error);
+      toast.error("Gagal", {
+        description: error.response?.data?.message || "Gagal menghapus penghuni",
+      });
     } finally {
       setDeleting(false);
     }
