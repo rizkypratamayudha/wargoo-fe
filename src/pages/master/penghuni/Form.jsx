@@ -98,10 +98,8 @@ export default function FormPenghuni({ open, onClose, penghuni, onSuccess }) {
         submitData.append("status_penghuni", formData.status_penghuni);
         submitData.append("no_telepon", formData.no_telepon);
         submitData.append("status_pernikahan", formData.status_pernikahan);
-        if (formData.foto_ktp) {
+        if (formData.foto_ktp instanceof File) {
           submitData.append("foto_ktp", formData.foto_ktp);
-        } else if (penghuni.foto_ktp) {
-          submitData.append("foto_ktp", penghuni.foto_ktp);
         }
         await update(penghuni.id, submitData);
       } else {
