@@ -10,6 +10,17 @@ export const index = async (page = 1, limit = 10, search = '', status = '') => {
     return response.data
 }
 
+export const indexAll = async () => {
+    const response = await axios.get(`${API_URL}/penghuni`, {
+        headers: {
+            'Content-Type': 'Application/json'
+        }
+    })
+    return response.data
+}
+
+
+
 export const show = async (id) => {
     const response = await axios.get(`${API_URL}/penghuni/${id}`, {
         headers: {

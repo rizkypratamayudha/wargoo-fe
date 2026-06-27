@@ -19,7 +19,7 @@ import {
   CollapsibleTrigger,
 } from "@/components/ui/collapsible";
 import { Link } from "react-router-dom";
-import { ChevronRight, Database, Key, LayoutDashboard, Users } from "lucide-react";
+import { ChevronRight, Database, Home, Key, LayoutDashboard, Users } from "lucide-react";
 
 // Data menu yang sudah mendukung fitur Dropdown (Sub-menu)
 const menuItems = [
@@ -27,6 +27,11 @@ const menuItems = [
     title: "Dashboard",
     url: "/",
     icon: LayoutDashboard,
+  },
+  {
+    title: "Hunian",
+    url: "hunian",
+    icon: Home,
   },
   {
     title: "Master Data", icon: Database,
